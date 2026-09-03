@@ -1,0 +1,115 @@
+[
+  {
+    "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b;1",
+    "@type": "Interface",
+    "contents": [
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:PotenciaGenerada;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Potencia Generada"
+        },
+        "name": "PotenciaGenerada",
+        "schema": "double",
+        "decimalPlaces": 1,
+        "maxValue": 500,
+        "minValue": 0
+      },
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:TemperaturaDelPanel;1",
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Temperatura del Panel"
+        },
+        "name": "TemperaturaDelPanel",
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "decimalPlaces": 1,
+        "maxValue": 100,
+        "minValue": 0
+      },
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:VoltajeDeSalida;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Voltaje de Salida"
+        },
+        "name": "VoltajeDeSalida",
+        "schema": "double",
+        "unit": "volt",
+        "decimalPlaces": 1,
+        "maxValue": 60,
+        "minValue": 0
+      },
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:CorrienteDeSalida;1",
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Corriente de Salida"
+        },
+        "name": "CorrienteDeSalida",
+        "schema": "double",
+        "unit": "ampere",
+        "decimalPlaces": 2,
+        "maxValue": 15,
+        "minValue": 0
+      },
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:Ubicacion;1",
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "displayName": {
+          "en": "Ubicacion"
+        },
+        "name": "Ubicacion",
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:PotenciaNominal;1",
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "displayName": {
+          "en": "Potencia Nominal"
+        },
+        "name": "PotenciaNominal",
+        "schema": "double",
+        "unit": "watt",
+        "writable": false
+      },
+      {
+        "@id": "dtmi:laboratorio1hypnos:DispositivoLaboratorio1_40b:ReiniciarControlador;1",
+        "@type": "Command",
+        "commandType": "synchronous",
+        "displayName": {
+          "en": "Reiniciar Controlador"
+        },
+        "name": "ReiniciarControlador"
+      }
+    ],
+    "displayName": {
+      "en": "Dispositivo Laboratorio 1"
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ]
+  }
+]
