@@ -1,0 +1,6 @@
+.pio/
+.vscode/
+include/iot_configs.h
+include/secrets.h
+*.log
+wokwi.vcd
