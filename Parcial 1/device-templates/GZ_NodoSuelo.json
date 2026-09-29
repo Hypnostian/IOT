@@ -1,0 +1,251 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:NodoSuelo;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Nodo de Suelo",
+      "en": "GZ Nodo de Suelo"
+    },
+    "description": {
+      "es": "Nodo enterrado de lote de cultivo de cacao. Ancla: METER TEROS 12 (humedad, temperatura y CE del suelo), Melexis MLX90614 (temperatura de canopy por IR) y Apogee SQ-500 (PAR)."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity",
+          "NumberValue"
+        ],
+        "name": "humedadSuelo",
+        "displayName": {
+          "es": "Humedad volumetrica del suelo (%VWC)",
+          "en": "Humedad volumetrica del suelo (%VWC)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 70,
+        "decimalPlaces": 1,
+        "comment": "METER TEROS 12: 0-70 % VWC, exactitud +/-0.03 m3/m3"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempSuelo",
+        "displayName": {
+          "es": "Temperatura del suelo (C)",
+          "en": "Temperatura del suelo (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": -40,
+        "maxValue": 60,
+        "decimalPlaces": 1,
+        "comment": "METER TEROS 12: -40 a 60 C, +/-0.5 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "ceSuelo",
+        "displayName": {
+          "es": "Conductividad electrica del suelo (dS/m)",
+          "en": "Conductividad electrica del suelo (dS/m)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 20,
+        "decimalPlaces": 2,
+        "comment": "METER TEROS 12: 0-20 dS/m, +/-(5 % + 0.01 dS/m)"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempCanopy",
+        "displayName": {
+          "es": "Temperatura de canopy (C)",
+          "en": "Temperatura de canopy (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": -20,
+        "maxValue": 80,
+        "decimalPlaces": 1,
+        "comment": "Melexis MLX90614: -70 a 380 C, +/-0.5 C entre 0 y 50 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "parPPFD",
+        "displayName": {
+          "es": "Radiacion PAR - PPFD (umol/m2/s)",
+          "en": "Radiacion PAR - PPFD (umol/m2/s)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 2500,
+        "decimalPlaces": 0,
+        "comment": "Apogee SQ-500: 0-4000 umol/m2/s, +/-5 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "bateria",
+        "displayName": {
+          "es": "Nivel de bateria (%)",
+          "en": "Nivel de bateria (%)"
+        },
+        "schema": "integer",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "rssi",
+        "displayName": {
+          "es": "Nivel de senal (dBm)",
+          "en": "Nivel de senal (dBm)"
+        },
+        "schema": "integer",
+        "minValue": -120,
+        "maxValue": 0
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "lote",
+        "displayName": {
+          "es": "Lote",
+          "en": "Lote"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "variedadCacao",
+        "displayName": {
+          "es": "Variedad de cacao",
+          "en": "Variedad de cacao"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "areaHa",
+        "displayName": {
+          "es": "Area del lote (ha)",
+          "en": "Area del lote (ha)"
+        },
+        "schema": "double",
+        "writable": false,
+        "minValue": 0,
+        "maxValue": 50,
+        "decimalPlaces": 2
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "profundidadSensorCm",
+        "displayName": {
+          "es": "Profundidad del sensor (cm)",
+          "en": "Profundidad del sensor (cm)"
+        },
+        "schema": "integer",
+        "writable": false,
+        "minValue": 0,
+        "maxValue": 200
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "umbralRiegoVWC",
+        "displayName": {
+          "es": "Umbral de riego (%VWC)",
+          "en": "Umbral de riego (%VWC)"
+        },
+        "schema": "double",
+        "writable": true,
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 70,
+        "decimalPlaces": 1,
+        "comment": "Por debajo de este valor se dispara el riego del lote"
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "intervaloTelemetriaSeg",
+        "displayName": {
+          "es": "Intervalo de telemetria (s)",
+          "en": "Intervalo de telemetria (s)"
+        },
+        "schema": "integer",
+        "writable": true,
+        "minValue": 5,
+        "maxValue": 3600
+      },
+      {
+        "@type": "Command",
+        "name": "CalibrarSensorSuelo",
+        "displayName": {
+          "es": "Calibrar sensor de suelo",
+          "en": "Calibrar sensor de suelo"
+        },
+        "commandType": "synchronous"
+      },
+      {
+        "@type": "Command",
+        "name": "ActivarRiegoLote",
+        "displayName": {
+          "es": "Activar riego del lote",
+          "en": "Activar riego del lote"
+        },
+        "commandType": "synchronous",
+        "request": {
+          "@type": "CommandPayload",
+          "name": "encender",
+          "displayName": {
+            "es": "Encender",
+            "en": "Encender"
+          },
+          "schema": "boolean"
+        }
+      }
+    ]
+  }
+]

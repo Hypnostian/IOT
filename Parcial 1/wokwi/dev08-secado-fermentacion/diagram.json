@@ -1,0 +1,201 @@
+{
+  "version": 1,
+  "author": "Granja Zenon - Cacao | DEV08 Secado y fermentacion (Marinela)",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -150,
+      "left": -230,
+      "attrs": {
+        "temperature": "34",
+        "humidity": "88"
+      }
+    },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntcMasa",
+      "top": 20,
+      "left": -260,
+      "attrs": {
+        "temperature": "46"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "potMasa",
+      "top": 160,
+      "left": -260,
+      "attrs": {
+        "value": "512"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "potPh",
+      "top": 300,
+      "left": -260,
+      "attrs": {
+        "value": "512"
+      }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servoVolteo",
+      "top": -140,
+      "left": 220,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledVentilador",
+      "top": 120,
+      "left": 250,
+      "attrs": {
+        "color": "green",
+        "label": "Ventilador"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 120,
+      "left": 160,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "dht1:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "dht1:SDA",
+      "esp:15",
+      "green",
+      []
+    ],
+    [
+      "dht1:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "ntcMasa:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "ntcMasa:OUT",
+      "esp:34",
+      "violet",
+      []
+    ],
+    [
+      "ntcMasa:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "potMasa:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "potMasa:SIG",
+      "esp:35",
+      "orange",
+      []
+    ],
+    [
+      "potMasa:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "potPh:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "potPh:SIG",
+      "esp:32",
+      "yellow",
+      []
+    ],
+    [
+      "potPh:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "servoVolteo:V+",
+      "esp:5V",
+      "red",
+      []
+    ],
+    [
+      "servoVolteo:PWM",
+      "esp:13",
+      "cyan",
+      []
+    ],
+    [
+      "servoVolteo:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:2",
+      "r1:1",
+      "green",
+      []
+    ],
+    [
+      "r1:2",
+      "ledVentilador:A",
+      "green",
+      []
+    ],
+    [
+      "ledVentilador:C",
+      "esp:GND.3",
+      "black",
+      []
+    ],
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ]
+  ],
+  "dependencies": {}
+}

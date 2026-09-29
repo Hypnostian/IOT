@@ -1,0 +1,23 @@
+[Unit]
+Description=Granja Zenon - Estacion de campo (replay de CSV historico, 60 s)
+Documentation=file:///opt/granjazenon/README.md
+After=network-online.target chrony.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=zenon
+Group=zenon
+WorkingDirectory=/opt/granjazenon
+ExecStart=/opt/granjazenon/.venv/bin/python /opt/granjazenon/dev05_estacion_replay_csv.py --ventanas 01:00-02:30,13:00-13:40
+Restart=always
+RestartSec=20
+# La VM tiene menos de 1 GiB: se acota cada nodo para que un pico no
+# se lleve por delante al resto de la flota.
+MemoryMax=180M
+StandardOutput=append:/opt/granjazenon/logs/dev05.log
+StandardError=append:/opt/granjazenon/logs/dev05.log
+SyslogIdentifier=gz-dev05
+
+[Install]
+WantedBy=multi-user.target

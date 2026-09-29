@@ -1,0 +1,23 @@
+[Unit]
+Description=Granja Zenon - Calidad de aire rural (API publica Open-Meteo, 600 s)
+Documentation=file:///opt/granjazenon/README.md
+After=network-online.target chrony.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=zenon
+Group=zenon
+WorkingDirectory=/opt/granjazenon
+ExecStart=/opt/granjazenon/.venv/bin/python /opt/granjazenon/dev07_aire_openmeteo.py
+Restart=always
+RestartSec=20
+# La VM tiene menos de 1 GiB: se acota cada nodo para que un pico no
+# se lleve por delante al resto de la flota.
+MemoryMax=180M
+StandardOutput=append:/opt/granjazenon/logs/dev07.log
+StandardError=append:/opt/granjazenon/logs/dev07.log
+SyslogIdentifier=gz-dev07
+
+[Install]
+WantedBy=multi-user.target

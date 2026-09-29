@@ -1,0 +1,225 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:SecadoFermentacion;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Secado y Fermentacion",
+      "en": "GZ Secado y Fermentacion"
+    },
+    "description": {
+      "es": "Cajon de fermentacion y marquesina de secado de la poscosecha. Ancla: Maxim DS18B20 (sonda de masa), Aosong AM2302/DHT22 (ambiente del cajon), celda de carga con HX711 y sonda de pH Atlas Scientific."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempCaja",
+        "displayName": {
+          "es": "Temperatura del cajon (C)",
+          "en": "Temperatura del cajon (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": 10,
+        "maxValue": 70,
+        "decimalPlaces": 1,
+        "comment": "Aosong AM2302 (DHT22): -40 a 80 C, +/-0.5 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempNucleoMasa",
+        "displayName": {
+          "es": "Temperatura del nucleo de la masa (C)",
+          "en": "Temperatura del nucleo de la masa (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": 10,
+        "maxValue": 70,
+        "decimalPlaces": 1,
+        "comment": "Maxim DS18B20: -55 a 125 C, +/-0.5 C entre -10 y 85 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity",
+          "NumberValue"
+        ],
+        "name": "hrCaja",
+        "displayName": {
+          "es": "Humedad relativa del cajon (%)",
+          "en": "Humedad relativa del cajon (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "Aosong AM2302 (DHT22): 0-100 % HR, +/-2 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "masaEstimada",
+        "displayName": {
+          "es": "Masa estimada del lote (kg)",
+          "en": "Masa estimada del lote (kg)"
+        },
+        "schema": "double",
+        "unit": "kilogram",
+        "minValue": 0,
+        "maxValue": 500,
+        "decimalPlaces": 1,
+        "comment": "Celda de carga 500 kg + HX711: no linealidad 0.05 % F.S."
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "phPulpa",
+        "displayName": {
+          "es": "pH de la pulpa",
+          "en": "pH de la pulpa"
+        },
+        "schema": "double",
+        "minValue": 2,
+        "maxValue": 8,
+        "decimalPlaces": 2,
+        "comment": "Atlas Scientific pH: 0-14, +/-0.02"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "horasFermentacion",
+        "displayName": {
+          "es": "Horas de fermentacion (h)",
+          "en": "Horas de fermentacion (h)"
+        },
+        "schema": "double",
+        "unit": "hour",
+        "minValue": 0,
+        "maxValue": 200,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "BooleanValue"
+        ],
+        "name": "ventiladorOn",
+        "displayName": {
+          "es": "Ventilador de la marquesina",
+          "en": "Ventilador de la marquesina"
+        },
+        "schema": "boolean",
+        "trueName": "Encendido",
+        "falseName": "Apagado"
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "numeroCaja",
+        "displayName": {
+          "es": "Numero de cajon",
+          "en": "Numero de cajon"
+        },
+        "schema": "integer",
+        "writable": false,
+        "minValue": 1,
+        "maxValue": 20
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "loteOrigen",
+        "displayName": {
+          "es": "Lote de origen de la masa",
+          "en": "Lote de origen de la masa"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "tempObjetivoC",
+        "displayName": {
+          "es": "Temperatura objetivo (C)",
+          "en": "Temperatura objetivo (C)"
+        },
+        "schema": "double",
+        "writable": true,
+        "unit": "degreeCelsius",
+        "minValue": 30,
+        "maxValue": 60,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "horasObjetivo",
+        "displayName": {
+          "es": "Horas objetivo de fermentacion (h)",
+          "en": "Horas objetivo de fermentacion (h)"
+        },
+        "schema": "double",
+        "writable": true,
+        "unit": "hour",
+        "minValue": 0,
+        "maxValue": 200,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": "Command",
+        "name": "VoltearMasa",
+        "displayName": {
+          "es": "Voltear la masa del cajon",
+          "en": "Voltear la masa del cajon"
+        },
+        "commandType": "synchronous"
+      },
+      {
+        "@type": "Command",
+        "name": "ControlarVentilador",
+        "displayName": {
+          "es": "Controlar ventilador de secado",
+          "en": "Controlar ventilador de secado"
+        },
+        "commandType": "synchronous",
+        "request": {
+          "@type": "CommandPayload",
+          "name": "encender",
+          "displayName": {
+            "es": "Encender",
+            "en": "Encender"
+          },
+          "schema": "boolean"
+        }
+      }
+    ]
+  }
+]

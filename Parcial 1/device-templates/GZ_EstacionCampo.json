@@ -1,0 +1,156 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:EstacionCampo;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Estacion de Campo",
+      "en": "GZ Estacion de Campo"
+    },
+    "description": {
+      "es": "Estacion de lote con pluviometro y sensor de humectacion foliar, orientada al riesgo de monilia (Moniliophthora roreri). Ancla: Davis 7852 y Davis 6420."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "lluviaLote",
+        "displayName": {
+          "es": "Lluvia del lote (mm)",
+          "en": "Lluvia del lote (mm)"
+        },
+        "schema": "double",
+        "unit": "millimetre",
+        "minValue": 0,
+        "maxValue": 150,
+        "decimalPlaces": 1,
+        "comment": "Davis 7852: resolucion 0.2 mm por pulso, +/-4 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "humedadFoliar",
+        "displayName": {
+          "es": "Humectacion foliar (%)",
+          "en": "Humectacion foliar (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "Davis 6420: escala 0-15 normalizada a 0-100 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "horasHumectacion",
+        "displayName": {
+          "es": "Horas de humectacion acumuladas (h)",
+          "en": "Horas de humectacion acumuladas (h)"
+        },
+        "schema": "double",
+        "unit": "hour",
+        "minValue": 0,
+        "maxValue": 24,
+        "decimalPlaces": 2,
+        "comment": "Sumatoria diaria; entrada del modelo de monilia"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempFoliar",
+        "displayName": {
+          "es": "Temperatura foliar (C)",
+          "en": "Temperatura foliar (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": 0,
+        "maxValue": 50,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "riesgoMonilia",
+        "displayName": {
+          "es": "Indice de riesgo de monilia (0-100)",
+          "en": "Indice de riesgo de monilia (0-100)"
+        },
+        "schema": "integer",
+        "minValue": 0,
+        "maxValue": 100,
+        "comment": "Calculado: (0.60*humectacion + 4.0*min(horas,12)) * f(T), f(T)=1-|T-24|/6"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "bateria",
+        "displayName": {
+          "es": "Nivel de bateria (%)",
+          "en": "Nivel de bateria (%)"
+        },
+        "schema": "integer",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "lote",
+        "displayName": {
+          "es": "Lote",
+          "en": "Lote"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "alturaInstalacionM",
+        "displayName": {
+          "es": "Altura de instalacion (m)",
+          "en": "Altura de instalacion (m)"
+        },
+        "schema": "double",
+        "writable": false,
+        "unit": "metre",
+        "minValue": 0,
+        "maxValue": 10,
+        "decimalPlaces": 2
+      },
+      {
+        "@type": "Command",
+        "name": "ReiniciarPluviometro",
+        "displayName": {
+          "es": "Reiniciar acumulado del pluviometro",
+          "en": "Reiniciar acumulado del pluviometro"
+        },
+        "commandType": "synchronous"
+      }
+    ]
+  }
+]

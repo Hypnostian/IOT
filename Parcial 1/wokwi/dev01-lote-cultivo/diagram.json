@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "author": "Granja Zenon - Cacao | DEV01 Lote de cultivo 1 (Zenon Alto)",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -140,
+      "left": -230,
+      "attrs": {
+        "temperature": "26",
+        "humidity": "82"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "potHum",
+      "top": 30,
+      "left": -260,
+      "attrs": {
+        "value": "512"
+      }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "potCe",
+      "top": 170,
+      "left": -260,
+      "attrs": {
+        "value": "512"
+      }
+    },
+    {
+      "type": "wokwi-ntc-temperature-sensor",
+      "id": "ntc1",
+      "top": -140,
+      "left": 210,
+      "attrs": {
+        "temperature": "23"
+      }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": 30,
+      "left": 230,
+      "attrs": {
+        "lux": "9000"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledRiego",
+      "top": 200,
+      "left": 230,
+      "attrs": {
+        "color": "blue",
+        "label": "Riego"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 200,
+      "left": 140,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "dht1:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "dht1:SDA",
+      "esp:15",
+      "green",
+      []
+    ],
+    [
+      "dht1:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "potHum:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "potHum:SIG",
+      "esp:34",
+      "orange",
+      []
+    ],
+    [
+      "potHum:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "potCe:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "potCe:SIG",
+      "esp:35",
+      "orange",
+      []
+    ],
+    [
+      "potCe:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ],
+    [
+      "ntc1:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "ntc1:OUT",
+      "esp:32",
+      "violet",
+      []
+    ],
+    [
+      "ntc1:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "ldr1:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "ldr1:AO",
+      "esp:33",
+      "yellow",
+      []
+    ],
+    [
+      "ldr1:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:2",
+      "r1:1",
+      "blue",
+      []
+    ],
+    [
+      "r1:2",
+      "ledRiego:A",
+      "blue",
+      []
+    ],
+    [
+      "ledRiego:C",
+      "esp:GND.3",
+      "black",
+      []
+    ],
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ]
+  ],
+  "dependencies": {}
+}

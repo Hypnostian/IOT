@@ -1,0 +1,177 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:NodoDosel;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Nodo de Dosel",
+      "en": "GZ Nodo de Dosel"
+    },
+    "description": {
+      "es": "Nodo bajo el sombrio del cacaotal. Ancla: Sensirion SHT31-D (temperatura y humedad) y AMS TSL2591 (iluminancia)."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempDosel",
+        "displayName": {
+          "es": "Temperatura bajo dosel (C)",
+          "en": "Temperatura bajo dosel (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": -10,
+        "maxValue": 60,
+        "decimalPlaces": 1,
+        "comment": "Sensirion SHT31-D: -40 a 125 C, +/-0.2 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity",
+          "NumberValue"
+        ],
+        "name": "hrDosel",
+        "displayName": {
+          "es": "Humedad relativa bajo dosel (%)",
+          "en": "Humedad relativa bajo dosel (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "Sensirion SHT31-D: 0-100 % HR, +/-2 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Illuminance",
+          "NumberValue"
+        ],
+        "name": "luxDosel",
+        "displayName": {
+          "es": "Iluminancia bajo dosel (lux)",
+          "en": "Iluminancia bajo dosel (lux)"
+        },
+        "schema": "double",
+        "unit": "lux",
+        "minValue": 0,
+        "maxValue": 120000,
+        "decimalPlaces": 0,
+        "comment": "AMS TSL2591: 188 ulux a 88000 lux"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "indiceSombra",
+        "displayName": {
+          "es": "Indice de sombra (%)",
+          "en": "Indice de sombra (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "Calculado: 100 * (1 - lux bajo dosel / lux a cielo abierto)"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "dpvDosel",
+        "displayName": {
+          "es": "Deficit de presion de vapor (kPa)",
+          "en": "Deficit de presion de vapor (kPa)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 6,
+        "decimalPlaces": 2,
+        "comment": "Calculado a partir de temperatura y HR (ecuacion de Tetens)"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "bateria",
+        "displayName": {
+          "es": "Nivel de bateria (%)",
+          "en": "Nivel de bateria (%)"
+        },
+        "schema": "integer",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "especieSombrio",
+        "displayName": {
+          "es": "Especie de sombrio",
+          "en": "Especie de sombrio"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "alturaDoselM",
+        "displayName": {
+          "es": "Altura del dosel (m)",
+          "en": "Altura del dosel (m)"
+        },
+        "schema": "double",
+        "writable": false,
+        "unit": "metre",
+        "minValue": 0,
+        "maxValue": 40,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "umbralSombraPct",
+        "displayName": {
+          "es": "Umbral minimo de sombra (%)",
+          "en": "Umbral minimo de sombra (%)"
+        },
+        "schema": "double",
+        "writable": true,
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 0
+      },
+      {
+        "@type": "Command",
+        "name": "ForzarLecturaDosel",
+        "displayName": {
+          "es": "Forzar lectura inmediata",
+          "en": "Forzar lectura inmediata"
+        },
+        "commandType": "synchronous"
+      }
+    ]
+  }
+]

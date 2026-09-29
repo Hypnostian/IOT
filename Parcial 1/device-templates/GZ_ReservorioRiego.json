@@ -1,0 +1,193 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:ReservorioRiego;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Reservorio y Riego",
+      "en": "GZ Reservorio y Riego"
+    },
+    "description": {
+      "es": "Reservorio del predio y linea de riego por goteo. Ancla: MaxBotix MB7389 (nivel ultrasonico), caudalimetro de efecto Hall YF-B10 y transductor de presion 0-10 bar."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "nivelTanque",
+        "displayName": {
+          "es": "Nivel del tanque (%)",
+          "en": "Nivel del tanque (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "MaxBotix MB7389: 300-5000 mm, resolucion 1 mm, +/-1 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "volumenTanque",
+        "displayName": {
+          "es": "Volumen almacenado (m3)",
+          "en": "Volumen almacenado (m3)"
+        },
+        "schema": "double",
+        "unit": "cubicMetre",
+        "minValue": 0,
+        "maxValue": 60,
+        "decimalPlaces": 2
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "caudal",
+        "displayName": {
+          "es": "Caudal de la linea (L/min)",
+          "en": "Caudal de la linea (L/min)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 200,
+        "decimalPlaces": 1,
+        "comment": "YF-B10: 1-200 L/min, +/-3 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "volumenAcumulado",
+        "displayName": {
+          "es": "Volumen acumulado del dia (m3)",
+          "en": "Volumen acumulado del dia (m3)"
+        },
+        "schema": "double",
+        "unit": "cubicMetre",
+        "minValue": 0,
+        "maxValue": 500,
+        "decimalPlaces": 3,
+        "comment": "Sumatoria diaria del caudal"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "presionLinea",
+        "displayName": {
+          "es": "Presion de la linea (bar)",
+          "en": "Presion de la linea (bar)"
+        },
+        "schema": "double",
+        "unit": "bar",
+        "minValue": 0,
+        "maxValue": 10,
+        "decimalPlaces": 2,
+        "comment": "Transductor 0-10 bar, +/-1 % F.S."
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "BooleanValue"
+        ],
+        "name": "bombaOn",
+        "displayName": {
+          "es": "Bomba de riego",
+          "en": "Bomba de riego"
+        },
+        "schema": "boolean",
+        "trueName": "Encendida",
+        "falseName": "Apagada"
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "capacidadTanqueM3",
+        "displayName": {
+          "es": "Capacidad del tanque (m3)",
+          "en": "Capacidad del tanque (m3)"
+        },
+        "schema": "double",
+        "writable": false,
+        "unit": "cubicMetre",
+        "minValue": 0,
+        "maxValue": 500,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "potenciaBombaKw",
+        "displayName": {
+          "es": "Potencia de la bomba (kW)",
+          "en": "Potencia de la bomba (kW)"
+        },
+        "schema": "double",
+        "writable": false,
+        "minValue": 0,
+        "maxValue": 50,
+        "decimalPlaces": 2
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "nivelMinimoPct",
+        "displayName": {
+          "es": "Nivel minimo de alarma (%)",
+          "en": "Nivel minimo de alarma (%)"
+        },
+        "schema": "double",
+        "writable": true,
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 0
+      },
+      {
+        "@type": "Command",
+        "name": "ControlarBomba",
+        "displayName": {
+          "es": "Encender o apagar la bomba",
+          "en": "Encender o apagar la bomba"
+        },
+        "commandType": "synchronous",
+        "request": {
+          "@type": "CommandPayload",
+          "name": "encender",
+          "displayName": {
+            "es": "Encender",
+            "en": "Encender"
+          },
+          "schema": "boolean"
+        }
+      },
+      {
+        "@type": "Command",
+        "name": "PurgarLinea",
+        "displayName": {
+          "es": "Purgar la linea de riego",
+          "en": "Purgar la linea de riego"
+        },
+        "commandType": "synchronous"
+      }
+    ]
+  }
+]

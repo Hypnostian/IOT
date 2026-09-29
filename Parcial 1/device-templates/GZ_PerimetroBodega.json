@@ -1,0 +1,183 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:PerimetroBodega;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Perimetro y Bodega",
+      "en": "GZ Perimetro y Bodega"
+    },
+    "description": {
+      "es": "Control de acceso de la bodega de grano seco y perimetro del predio. Ancla: contacto magnetico MC-38, PIR HC-SR501 y Sensirion SHT31-D."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "BooleanValue"
+        ],
+        "name": "puertaAbierta",
+        "displayName": {
+          "es": "Puerta de bodega",
+          "en": "Puerta de bodega"
+        },
+        "schema": "boolean",
+        "trueName": "Abierta",
+        "falseName": "Cerrada",
+        "comment": "Contacto magnetico MC-38, distancia de operacion 15-25 mm"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "BooleanValue"
+        ],
+        "name": "movimiento",
+        "displayName": {
+          "es": "Deteccion de movimiento",
+          "en": "Deteccion de movimiento"
+        },
+        "schema": "boolean",
+        "trueName": "Movimiento",
+        "falseName": "Sin movimiento",
+        "comment": "PIR HC-SR501: alcance 3-7 m, angulo 110-120 grados"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempBodega",
+        "displayName": {
+          "es": "Temperatura de la bodega (C)",
+          "en": "Temperatura de la bodega (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": 0,
+        "maxValue": 50,
+        "decimalPlaces": 1,
+        "comment": "Sensirion SHT31-D: -40 a 125 C, +/-0.2 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity",
+          "NumberValue"
+        ],
+        "name": "hrBodega",
+        "displayName": {
+          "es": "Humedad relativa de la bodega (%)",
+          "en": "Humedad relativa de la bodega (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "Sensirion SHT31-D: 0-100 % HR, +/-2 %. Grano seco exige HR < 70 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "eventosAcceso",
+        "displayName": {
+          "es": "Eventos de acceso (recuento)",
+          "en": "Eventos de acceso (recuento)"
+        },
+        "schema": "integer",
+        "minValue": 0,
+        "maxValue": 1000,
+        "comment": "Contador acumulado; se analiza con sumatoria"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "nivelBateriaRespaldo",
+        "displayName": {
+          "es": "Bateria de respaldo (%)",
+          "en": "Bateria de respaldo (%)"
+        },
+        "schema": "integer",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "zona",
+        "displayName": {
+          "es": "Zona",
+          "en": "Zona"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "capacidadBodegaSacos",
+        "displayName": {
+          "es": "Capacidad de la bodega (sacos)",
+          "en": "Capacidad de la bodega (sacos)"
+        },
+        "schema": "integer",
+        "writable": false,
+        "minValue": 0,
+        "maxValue": 5000
+      },
+      {
+        "@type": [
+          "Property",
+          "BooleanValue"
+        ],
+        "name": "alarmaArmada",
+        "displayName": {
+          "es": "Alarma armada",
+          "en": "Alarma armada"
+        },
+        "schema": "boolean",
+        "writable": true
+      },
+      {
+        "@type": "Command",
+        "name": "ArmarAlarma",
+        "displayName": {
+          "es": "Armar o desarmar la alarma",
+          "en": "Armar o desarmar la alarma"
+        },
+        "commandType": "synchronous",
+        "request": {
+          "@type": "CommandPayload",
+          "name": "armar",
+          "displayName": {
+            "es": "Armar",
+            "en": "Armar"
+          },
+          "schema": "boolean"
+        }
+      },
+      {
+        "@type": "Command",
+        "name": "ReconocerAlarma",
+        "displayName": {
+          "es": "Reconocer (ack) la alarma",
+          "en": "Reconocer (ack) la alarma"
+        },
+        "commandType": "synchronous"
+      }
+    ]
+  }
+]

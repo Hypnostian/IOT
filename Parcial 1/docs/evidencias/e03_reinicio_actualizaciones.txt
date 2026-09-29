@@ -1,0 +1,13 @@
+zenon@granjazenon:~$ journalctl --since "2026-09-25 06:01:50" --until "2026-09-25 06:02:05"
+2026-09-25T06:01:50: Starting apt-daily-upgrade.service - Daily apt upgrade and clean activities...
+2026-09-25T06:01:55: Reloading requested from client PID 46431 ('systemctl') (unit apt-daily-upgrade.service)...
+2026-09-25T06:02:02: Stopping granjazenon-dev02.service (Lote de cultivo 2 )
+2026-09-25T06:02:02: Stopping granjazenon-dev04.service (Dosel y sombrio )
+2026-09-25T06:02:02: Stopping granjazenon-dev05.service (Estacion de campo )
+2026-09-25T06:02:02: Stopping granjazenon-dev06.service (Meteorologia del predio )
+2026-09-25T06:02:02: Stopping granjazenon-dev07.service (Calidad de aire rural )
+2026-09-25T06:02:03: Stopping granjazenon-dev09.service (Reservorio y riego )
+2026-09-25T06:02:03: Stopping granjazenon-dev10.service (Perimetro y bodega )
+2026-09-25T06:02:03: Started granjazenon-dev09.service (Reservorio y riego )
+2026-09-25T06:02:03: Started granjazenon-dev02.service (Lote de cultivo 2 )
+2026-09-25T06:02:03: Started granjazenon-dev04.service (Dosel y sombrio )

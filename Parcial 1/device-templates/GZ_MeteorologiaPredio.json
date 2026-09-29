@@ -1,0 +1,238 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:MeteorologiaPredio;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Meteorologia del Predio",
+      "en": "GZ Meteorologia del Predio"
+    },
+    "description": {
+      "es": "Nodo meteorologico obligatorio del escenario. Los valores provienen del feed Atlas Weather (Azure Maps Weather API) y estan anclados al datasheet de la estacion Davis Vantage Pro2 que se instalaria en campo."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempExterior",
+        "displayName": {
+          "es": "Temperatura exterior (C)",
+          "en": "Temperatura exterior (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": -10,
+        "maxValue": 55,
+        "decimalPlaces": 1,
+        "comment": "Davis Vantage Pro2: -40 a 65 C, +/-0.5 C"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity",
+          "NumberValue"
+        ],
+        "name": "hrExterior",
+        "displayName": {
+          "es": "Humedad relativa exterior (%)",
+          "en": "Humedad relativa exterior (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1,
+        "comment": "Davis Vantage Pro2: 0-100 %, +/-3 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "lluviaAcumulada",
+        "displayName": {
+          "es": "Lluvia acumulada 24 h (mm)",
+          "en": "Lluvia acumulada 24 h (mm)"
+        },
+        "schema": "double",
+        "unit": "millimetre",
+        "minValue": 0,
+        "maxValue": 300,
+        "decimalPlaces": 1,
+        "comment": "Davis 6466M: resolucion 0.2 mm, +/-4 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "velocidadViento",
+        "displayName": {
+          "es": "Velocidad del viento (km/h)",
+          "en": "Velocidad del viento (km/h)"
+        },
+        "schema": "double",
+        "unit": "kilometrePerHour",
+        "minValue": 0,
+        "maxValue": 200,
+        "decimalPlaces": 1,
+        "comment": "Anemometro Davis 6410: 1-322 km/h, +/-5 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "direccionViento",
+        "displayName": {
+          "es": "Direccion del viento (grados)",
+          "en": "Direccion del viento (grados)"
+        },
+        "schema": "integer",
+        "minValue": 0,
+        "maxValue": 360,
+        "comment": "Davis 6410: 0-360 grados, +/-3 grados"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "radiacionSolar",
+        "displayName": {
+          "es": "Radiacion solar (W/m2)",
+          "en": "Radiacion solar (W/m2)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 1500,
+        "decimalPlaces": 1,
+        "comment": "Davis 6450: 0-1800 W/m2, +/-5 %"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "presionBarometrica",
+        "displayName": {
+          "es": "Presion barometrica (hPa)",
+          "en": "Presion barometrica (hPa)"
+        },
+        "schema": "double",
+        "unit": "millibar",
+        "minValue": 800,
+        "maxValue": 1100,
+        "decimalPlaces": 1,
+        "comment": "Davis Vantage Pro2: 410-820 mmHg, +/-1.0 hPa"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "puntoRocio",
+        "displayName": {
+          "es": "Punto de rocio (C)",
+          "en": "Punto de rocio (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": -10,
+        "maxValue": 40,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "indiceUV",
+        "displayName": {
+          "es": "Indice UV",
+          "en": "Indice UV"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 16,
+        "decimalPlaces": 1,
+        "comment": "Davis 6490: 0-16 indice UV, +/-5 %"
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "fuenteDatos",
+        "displayName": {
+          "es": "Fuente de datos",
+          "en": "Fuente de datos"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "latitud",
+        "displayName": {
+          "es": "Latitud",
+          "en": "Latitud"
+        },
+        "schema": "double",
+        "writable": false,
+        "minValue": -90,
+        "maxValue": 90,
+        "decimalPlaces": 5
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "longitud",
+        "displayName": {
+          "es": "Longitud",
+          "en": "Longitud"
+        },
+        "schema": "double",
+        "writable": false,
+        "minValue": -180,
+        "maxValue": 180,
+        "decimalPlaces": 5
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "timestampFuente",
+        "displayName": {
+          "es": "Marca de tiempo de la fuente",
+          "en": "Marca de tiempo de la fuente"
+        },
+        "schema": "string",
+        "writable": false,
+        "comment": "Fecha ISO-8601 que reporta la API, distinta de la de ingestion"
+      },
+      {
+        "@type": "Command",
+        "name": "RefrescarPronostico",
+        "displayName": {
+          "es": "Refrescar pronostico ahora",
+          "en": "Refrescar pronostico ahora"
+        },
+        "commandType": "synchronous"
+      }
+    ]
+  }
+]

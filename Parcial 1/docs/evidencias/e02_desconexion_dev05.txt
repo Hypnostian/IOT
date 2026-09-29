@@ -1,0 +1,10 @@
+zenon@granjazenon:~$ grep -A7 "2026-09-27 00:59" logs/dev05.log
+2026-09-27 00:58:44 [INFO] [gz-05-estacion-replay] TX #2402 -> {"timestampFuente": "2026-08-14T16:01:00+00:00", "lluviaLote": 0.0, "humedadFoliar": 19.1, "horasHumec
+2026-09-27 00:59:44 [INFO] [gz-05-estacion-replay] TX #2403 -> {"timestampFuente": "2026-08-14T16:02:00+00:00", "lluviaLote": 0.0, "humedadFoliar": 19.1, "horasHumec
+2026-09-27 01:00:44 [WARNING] [gz-05-estacion-replay] VENTANA DE DESCONEXIÓN: se corta el enlace a propósito (hueco documentado en la serie).
+2026-09-27 02:30:14 [INFO] [gz-05-estacion-replay] Provisionando en DPS (ámbito 0ne00FE0A26)...
+2026-09-27 02:30:17 [INFO] [gz-05-estacion-replay] Asignado al IoT Hub iotc-6900bef5-c526-4e67-8dfd-ea496cc54de0.azure-devices.net
+2026-09-27 02:30:17 [INFO] [gz-05-estacion-replay] CONECTADO. Origen: Replay de CSV histórico
+2026-09-27 02:30:17 [INFO] [gz-05-estacion-replay] TX #2404 -> {"timestampFuente": "2026-08-14T16:03:00+00:00", "lluviaLote": 0.0, "humedadFoliar": 19.1, "horasHumec
+2026-09-27 02:31:17 [INFO] [gz-05-estacion-replay] TX #2405 -> {"timestampFuente": "2026-08-14T16:04:00+00:00", "lluviaLote": 0.0, "humedadFoliar": 19.1, "horasHumec
+2026-09-27 02:32:18 [INFO] [gz-05-estacion-replay] TX #2406 -> {"timestampFuente": "2026-08-14T16:05:00+00:00", "lluviaLote": 0.0, "humedadFoliar": 19.1, "horasHumec

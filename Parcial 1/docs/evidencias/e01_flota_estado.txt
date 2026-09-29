@@ -1,0 +1,13 @@
+zenon@granjazenon:/opt/granjazenon$ ./deploy/flota.sh estado
+NODO     ESTADO     DESDE      MENSAJES ENVIADOS
+----------------------------------------------------------------
+dev02    active     2026-09-25 39357
+dev04    active     2026-09-25 9909
+dev05    active     2026-09-25 9005
+dev06    active     2026-09-28 1985
+dev07    active     2026-09-25 991
+dev09    active     2026-09-25 4932
+dev10    active     2026-09-28 15409
+
+               total        used        free      shared  buff/cache   available
+Mem:           892Mi       542Mi        74Mi       3.6Mi       448Mi       350Mi

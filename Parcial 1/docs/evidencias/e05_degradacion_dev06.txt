@@ -1,0 +1,7 @@
+zenon@granjazenon:~$ grep "2026-09-27 1[23]:" logs/dev06.log
+2026-09-27 12:52:41 [INFO] [gz-06-meteo-atlas] TX #658 -> {"tempExterior": 30.0, "hrExterior": 68.0, "lluviaAcumulada": 27.6, "velocidadViento": 13.0, "direccionViento": 293, 
+2026-09-27 12:57:42 [INFO] [gz-06-meteo-atlas] TX #659 -> {"tempExterior": 30.0, "hrExterior": 68.0, "lluviaAcumulada": 27.6, "velocidadViento": 13.0, "direccionViento": 293, 
+2026-09-27 13:02:42 [WARNING] [gz-06-meteo-atlas] Atlas Weather no respondió (401 Client Error: Unauthorized for url: https://atlas.microsoft.com/weather/currentConditions/js
+2026-09-27 13:02:42 [INFO] [gz-06-meteo-atlas] TX #660 -> {"tempExterior": 28.5, "hrExterior": 70.1, "lluviaAcumulada": 3.1, "velocidadViento": 4.4, "direccionViento": 113, "r
+2026-09-27 13:07:42 [WARNING] [gz-06-meteo-atlas] Atlas Weather no respondió (401 Client Error: Unauthorized for url: https://atlas.microsoft.com/weather/currentConditions/js
+2026-09-27 13:07:43 [INFO] [gz-06-meteo-atlas] TX #661 -> {"tempExterior": 28.7, "hrExterior": 71.0, "lluviaAcumulada": 17.1, "velocidadViento": 5.1, "direccionViento": 106, "

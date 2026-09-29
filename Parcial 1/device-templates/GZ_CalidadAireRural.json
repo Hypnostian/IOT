@@ -1,0 +1,176 @@
+[
+  {
+    "@id": "dtmi:granjazenon:cacao:CalidadAireRural;1",
+    "@type": "Interface",
+    "displayName": {
+      "es": "GZ Calidad de Aire Rural",
+      "en": "GZ Calidad de Aire Rural"
+    },
+    "description": {
+      "es": "Nodo de calidad de aire del camino de saca. Los valores provienen de la API publica Open-Meteo Air Quality y estan anclados al datasheet del sensor Sensirion SPS30."
+    },
+    "@context": [
+      "dtmi:iotcentral:context;2",
+      "dtmi:dtdl:context;2"
+    ],
+    "contents": [
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "pm25",
+        "displayName": {
+          "es": "Material particulado PM2.5 (ug/m3)",
+          "en": "Material particulado PM2.5 (ug/m3)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 500,
+        "decimalPlaces": 1,
+        "comment": "Sensirion SPS30: 0-1000 ug/m3, +/-10 ug/m3 entre 0 y 100"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "pm10",
+        "displayName": {
+          "es": "Material particulado PM10 (ug/m3)",
+          "en": "Material particulado PM10 (ug/m3)"
+        },
+        "schema": "double",
+        "minValue": 0,
+        "maxValue": 500,
+        "decimalPlaces": 1,
+        "comment": "Sensirion SPS30: 0-1000 ug/m3, +/-25 % entre 100 y 1000"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "NumberValue"
+        ],
+        "name": "aqi",
+        "displayName": {
+          "es": "Indice de calidad del aire europeo",
+          "en": "Indice de calidad del aire europeo"
+        },
+        "schema": "integer",
+        "minValue": 0,
+        "maxValue": 500,
+        "comment": "European AQI reportado por Open-Meteo"
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "RelativeHumidity",
+          "NumberValue"
+        ],
+        "name": "hrAire",
+        "displayName": {
+          "es": "Humedad relativa del aire (%)",
+          "en": "Humedad relativa del aire (%)"
+        },
+        "schema": "double",
+        "unit": "percent",
+        "minValue": 0,
+        "maxValue": 100,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "Temperature",
+          "NumberValue"
+        ],
+        "name": "tempAire",
+        "displayName": {
+          "es": "Temperatura del aire (C)",
+          "en": "Temperatura del aire (C)"
+        },
+        "schema": "double",
+        "unit": "degreeCelsius",
+        "minValue": -10,
+        "maxValue": 50,
+        "decimalPlaces": 1
+      },
+      {
+        "@type": [
+          "Telemetry",
+          "BooleanValue"
+        ],
+        "name": "polvoCosecha",
+        "displayName": {
+          "es": "Evento de polvo por cosecha",
+          "en": "Evento de polvo por cosecha"
+        },
+        "schema": "boolean",
+        "trueName": "Polvo",
+        "falseName": "Limpio",
+        "comment": "Se marca cuando PM10 supera el doble de la media movil"
+      },
+      {
+        "@type": [
+          "Property",
+          "StringValue"
+        ],
+        "name": "fuenteDatos",
+        "displayName": {
+          "es": "Fuente de datos",
+          "en": "Fuente de datos"
+        },
+        "schema": "string",
+        "writable": false
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "latitud",
+        "displayName": {
+          "es": "Latitud",
+          "en": "Latitud"
+        },
+        "schema": "double",
+        "writable": false,
+        "minValue": -90,
+        "maxValue": 90,
+        "decimalPlaces": 5
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "longitud",
+        "displayName": {
+          "es": "Longitud",
+          "en": "Longitud"
+        },
+        "schema": "double",
+        "writable": false,
+        "minValue": -180,
+        "maxValue": 180,
+        "decimalPlaces": 5
+      },
+      {
+        "@type": [
+          "Property",
+          "NumberValue"
+        ],
+        "name": "umbralPm25",
+        "displayName": {
+          "es": "Umbral PM2.5 (ug/m3)",
+          "en": "Umbral PM2.5 (ug/m3)"
+        },
+        "schema": "double",
+        "writable": true,
+        "minValue": 0,
+        "maxValue": 500,
+        "decimalPlaces": 1
+      }
+    ]
+  }
+]

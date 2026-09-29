@@ -1,0 +1,31 @@
+# --- Secretos: nunca se suben -------------------------------------------
+.env
+*.pem
+*.key
+python/.dps-cache/
+wokwi/*/include/secrets.h
+wokwi/*/src/iot_configs.h
+
+# --- Material de trabajo que no forma parte de la entrega -----------------
+_privado/
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# --- PlatformIO / Wokwi ---------------------------------------------------
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# --- Office: archivos de bloqueo y versiones de trabajo -------------------
+~$*
+docs/*_v1.*.docx
+
+# --- Sistema --------------------------------------------------------------
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,16 @@
+# Flota IoT "Granja Zenon - Cacao" - Parcial 1
+# Probado sobre Python 3.12 (Ubuntu 24.04 LTS, VM granjazenon)
+
+# SDK oficial de Azure IoT: lo usan dev02, dev04, dev05, dev06 y dev07.
+azure-iot-device==2.14.0
+
+# Cliente MQTT explicito: lo usa dev10 (origen "MQTT crudo").
+paho-mqtt==1.6.1
+
+# Puentes REST: Azure Maps Weather (dev06), Open-Meteo (dev07),
+# DPS por REST y Device REST API de IoT Hub (dev09).
+requests==2.32.3
+
+# Analisis de la ventana de 4 dias (max / min / promedio / recuento / sumatoria).
+pandas==2.2.3
+matplotlib==3.9.2
