@@ -1,0 +1,15 @@
+{
+  "puerto": 8883,
+  "mensajes": 10,
+  "aceptados": 10,
+  "ms_conexion": 202.63,
+  "bytes_conexion_enviados": 963,
+  "bytes_conexion_recibidos": 3620,
+  "bytes_por_mensaje_enviados": 263.0,
+  "bytes_por_mensaje_recibidos": 33.0,
+  "latencia_min_ms": 133.46,
+  "latencia_prom_ms": 141.08,
+  "latencia_max_ms": 150.07,
+  "protocolo": "mqtt",
+  "fecha_utc": "2026-10-02T16:21:33.294Z"
+}

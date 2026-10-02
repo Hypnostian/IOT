@@ -1,0 +1,15 @@
+{
+  "puerto": 5671,
+  "mensajes": 10,
+  "aceptados": 10,
+  "ms_conexion": 285.13,
+  "bytes_conexion_enviados": 1216,
+  "bytes_conexion_recibidos": 4200,
+  "bytes_por_mensaje_enviados": 336.8,
+  "bytes_por_mensaje_recibidos": 54.9,
+  "latencia_min_ms": 132.85,
+  "latencia_prom_ms": 141.85,
+  "latencia_max_ms": 170.54,
+  "protocolo": "amqp",
+  "fecha_utc": "2026-10-02T16:10:36.400Z"
+}

@@ -1,0 +1,4 @@
+python-qpid-proton
+paho-mqtt
+python-dotenv
+certifi

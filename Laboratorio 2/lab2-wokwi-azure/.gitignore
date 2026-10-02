@@ -4,3 +4,4 @@ include/iot_configs.h
 include/secrets.h
 *.log
 wokwi.vcd
+src/iot_configs.h

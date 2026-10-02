@@ -1,0 +1,11 @@
+Hub: iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net
+20.44.8.231     gateway-prod-gw-centralus-6-g2.centralus.cloudapp.azure.com iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net
+
+Connection to iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net (20.44.8.231) 8883 port [tcp/*] succeeded!
+Connection to iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net (20.44.8.231) 5671 port [tcp/amqps] succeeded!
+Connection to iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net (20.44.8.231) 443 port [tcp/https] succeeded!
+
+Saludo TLS en el puerto 5671 (AMQPS):
+New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
+    Protocol  : TLSv1.2
+    Verify return code: 0 (ok)

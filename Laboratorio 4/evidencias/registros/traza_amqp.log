@@ -1,0 +1,55 @@
+[0x3f59aa70]: SASL:FRAME:  -> SASL
+[0x3f59aa70]: SASL:FRAME:  <- SASL
+[0x3f59aa70]: AMQP:FRAME:0 <- @sasl-mechanisms(64) [sasl-server-mechanisms=@<symbol>[:PLAIN, :ANONYMOUS, :MSSBCBS, :EXTERNAL]]
+[0x3f59aa70]: AMQP:FRAME:0 -> @sasl-init(65) [mechanism=:PLAIN, initial-response=<oculto>]
+[0x3f59aa70]: AMQP:FRAME:0 <- @sasl-outcome(68) [code=0x0]
+[0x3f59aa70]: AMQP:FRAME:  -> AMQP
+[0x3f59aa70]: AMQP:FRAME:0 -> @open(16) [container-id="90a63ea6-4f1d-4729-84f4-f70a849a8b4b", hostname="iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net", max-frame-size=0x8000, channel-max=0x7fff]
+[0x3f59aa70]: AMQP:FRAME:0 -> @begin(17) [next-outgoing-id=0x0, incoming-window=0x7fffffff, outgoing-window=0x7fffffff, handle-max=0x7fffffff]
+[0x3f59aa70]: AMQP:FRAME:0 -> @attach(18) [name="telemetria-panel", handle=0x0, role=false, snd-settle-mode=0x2, rcv-settle-mode=0x0, source=@source(40) [durable=0x0, timeout=0x0, dynamic=false], target=@target(41) [address="/devices/lab2-python-07/messages/events", durable=0x0, timeout=0x0, dynamic=false], initial-delivery-count=0x0, max-message-size=0x0]
+[0x3f59aa70]: AMQP:FRAME:  <- AMQP
+[0x3f59aa70]: AMQP:FRAME:0 <- @open(16) [container-id="92515de0972e40319ec0a7f297d8306a", max-frame-size=0xffff, channel-max=0x400, idle-time-out=0x3a980]
+[0x3f59aa70]: AMQP:FRAME:0 <- @begin(17) [remote-channel=0x0, next-outgoing-id=0x1, incoming-window=0x1388, outgoing-window=0x7fffffff, handle-max=0xffffffff]
+[0x3f59aa70]: AMQP:FRAME:0 <- @attach(18) [name="telemetria-panel", handle=0x0, role=true, snd-settle-mode=0x2, rcv-settle-mode=0x0, source=@source(40) [durable=0x0, expiry-policy=:session-end, timeout=0x0, dynamic=false], target=@target(41) [address="/devices/lab2-python-07/messages/events", durable=0x0, expiry-policy=:session-end, timeout=0x0, dynamic=false], incomplete-unsettled=false, initial-delivery-count=0x0, max-message-size=0x100000]
+[0x3f59aa70]: AMQP:FRAME:0 <- @flow(19) [next-incoming-id=0x0, incoming-window=0x1388, next-outgoing-id=0x0, outgoing-window=0x7fffffff, handle=0x0, delivery-count=0x0, link-credit=0x32, drain=false, echo=false]
+[0x3f59aa70]: AMQP:FRAME:0 -> @transfer(20) [handle=0x0, delivery-id=0x0, delivery-tag=b"1", message-format=0x0] (287) \x00SpE\x00Ss\xc0m\x08\xa1$0ba5573f-c863-4dfb-9540-f18fea649146@\xa1\x27/devices/lab2-python-07/messages/events@@@\xa3\x10application/json\xa3\x05utf-8\x00St\xd1\x00\x00\x008\x00\x00\x00\x02\xa1\x18iothub-creation-time-utc\xa1\x182026-10-02T16:34:42.044Z\x00Su\xa0d{\x22PotenciaGenerada\x22:17.4,\x22TemperaturaDelPanel\x22:26.6,\x22VoltajeDeSalida\x22:18.1,\x22CorrienteDeSalida\x22:0.96}
+[0x3f59aa70]: AMQP:FRAME:0 <- @disposition(21) [role=true, first=0x0, settled=true, state=@accepted(36) [], batchable=false]
+[0x3f59aa70]: AMQP:FRAME:0 -> @transfer(20) [handle=0x0, delivery-id=0x1, delivery-tag=b"2", message-format=0x0] (287) \x00SpE\x00Ss\xc0m\x08\xa1$63972c60-121d-4a75-a335-4d1ef418c03d@\xa1\x27/devices/lab2-python-07/messages/events@@@\xa3\x10application/json\xa3\x05utf-8\x00St\xd1\x00\x00\x008\x00\x00\x00\x02\xa1\x18iothub-creation-time-utc\xa1\x182026-10-02T16:34:44.043Z\x00Su\xa0d{\x22PotenciaGenerada\x22:18.4,\x22TemperaturaDelPanel\x22:26.3,\x22VoltajeDeSalida\x22:17.9,\x22CorrienteDeSalida\x22:1.03}
+[0x3f59aa70]: AMQP:FRAME:0 <- @disposition(21) [role=true, first=0x1, settled=true, state=@accepted(36) [], batchable=false]
+[0x3f59aa70]: AMQP:FRAME:0 -> @close(24) []
+[0x3f59aa70]: AMQP:FRAME:0 <- @close(24) []
+[0x3f59aa70]:   IO:FRAME:  <- EOS
+[0x3f59aa70]:   IO:FRAME:  -> EOS
+================================== AMQP ==================================
+Hostname: iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net
+Puerto: 5671 (amqps)
+TLS: Sí, certificado validado con certifi
+Autenticación: SASL PLAIN con token SAS
+Usuario SASL: lab2-python-07@sas.iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93
+Destino del enlace: /devices/lab2-python-07/messages/events
+Clave: Cargada, no mostrada
+==========================================================================
+[CONNECT] Abriendo conexión AMQP, sesión y enlace de envío...
+[AMQP] Conexión abierta con iotc-bc967d9e-3fc7-45ff-a3a8-f0a973a03e93.azure-devices.net
+[AMQP] Sesión y enlace listos en 281.12 ms
+[AMQP] Bytes de establecimiento (TLS + SASL + open/begin/attach): enviados=1218 recibidos=4200
+[FLOW] Crédito concedido por IoT Hub: 50 mensajes
+
+[TRANSFER] secuencia=0
+[TRANSFER] destino= /devices/lab2-python-07/messages/events
+[TRANSFER] payload_bytes= 100
+[TRANSFER] payload= {"PotenciaGenerada":17.4,"TemperaturaDelPanel":26.6,"VoltajeDeSalida":18.1,"CorrienteDeSalida":0.96}
+[TRANSFER] crédito restante= 49
+[DISPOSITION] secuencia=0 estado=accepted tiempo=164.75 ms
+
+[TRANSFER] secuencia=1
+[TRANSFER] destino= /devices/lab2-python-07/messages/events
+[TRANSFER] payload_bytes= 100
+[TRANSFER] payload= {"PotenciaGenerada":18.4,"TemperaturaDelPanel":26.3,"VoltajeDeSalida":17.9,"CorrienteDeSalida":1.03}
+[TRANSFER] crédito restante= 48
+[DISPOSITION] secuencia=1 estado=accepted tiempo=141.30 ms
+
+[FIN] Mensajes enviados: 2, aceptados: 2
+[FIN] Bytes por mensaje en el enlace: enviados=336.5 recibidos=54.5
+[FIN] Resumen guardado en resumen_amqp.json
+[DISCONNECT] Conexión AMQP cerrada

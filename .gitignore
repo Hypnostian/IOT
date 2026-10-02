@@ -1,0 +1,14 @@
+# Archivos temporales de Word y Office
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store

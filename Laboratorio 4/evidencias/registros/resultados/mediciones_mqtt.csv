@@ -1,0 +1,11 @@
+protocolo,secuencia,fecha_utc,payload_bytes,latencia_ms,intervalo_configurado_s,resultado
+mqtt,0,2026-10-02T16:20:46.876Z,100,140.94,5.0,puback
+mqtt,1,2026-10-02T16:20:52.017Z,100,139.21,5.0,puback
+mqtt,2,2026-10-02T16:20:57.157Z,100,144.68,5.0,puback
+mqtt,3,2026-10-02T16:21:02.302Z,100,133.46,5.0,puback
+mqtt,4,2026-10-02T16:21:07.436Z,100,141.00,5.0,puback
+mqtt,5,2026-10-02T16:21:12.577Z,100,139.74,5.0,puback
+mqtt,6,2026-10-02T16:21:17.718Z,100,150.07,5.0,puback
+mqtt,7,2026-10-02T16:21:22.868Z,100,137.06,5.0,puback
+mqtt,8,2026-10-02T16:21:28.005Z,100,139.72,5.0,puback
+mqtt,9,2026-10-02T16:21:33.146Z,100,144.87,5.0,puback

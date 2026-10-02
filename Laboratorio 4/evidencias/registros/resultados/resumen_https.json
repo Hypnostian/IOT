@@ -1,0 +1,18 @@
+{
+  "puerto": 443,
+  "mensajes": 10,
+  "aceptados": 10,
+  "ms_conexion": 128.94,
+  "conexiones_tls": 1,
+  "bytes_conexion_enviados": 611,
+  "bytes_conexion_recibidos": 3524,
+  "bytes_por_mensaje_enviados": 765.8,
+  "bytes_por_mensaje_recibidos": 93.0,
+  "bytes_por_mensaje_con_tls_enviados": 826.9,
+  "bytes_por_mensaje_con_tls_recibidos": 445.4,
+  "latencia_min_ms": 130.93,
+  "latencia_prom_ms": 144.27,
+  "latencia_max_ms": 201.28,
+  "protocolo": "https",
+  "fecha_utc": "2026-10-02T16:18:03.969Z"
+}

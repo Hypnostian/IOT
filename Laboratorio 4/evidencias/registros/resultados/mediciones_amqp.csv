@@ -1,0 +1,11 @@
+protocolo,secuencia,fecha_utc,payload_bytes,latencia_ms,intervalo_configurado_s,resultado
+amqp,0,2026-10-02T16:09:51.240Z,100,170.54,5.0,accepted
+amqp,1,2026-10-02T16:09:56.238Z,100,136.33,5.0,accepted
+amqp,2,2026-10-02T16:10:01.240Z,99,143.25,5.0,accepted
+amqp,3,2026-10-02T16:10:06.242Z,100,135.49,5.0,accepted
+amqp,4,2026-10-02T16:10:11.244Z,100,139.57,5.0,accepted
+amqp,5,2026-10-02T16:10:16.245Z,100,146.44,5.0,accepted
+amqp,6,2026-10-02T16:10:21.247Z,99,134.24,5.0,accepted
+amqp,7,2026-10-02T16:10:26.249Z,100,132.85,5.0,accepted
+amqp,8,2026-10-02T16:10:31.251Z,100,135.66,5.0,accepted
+amqp,9,2026-10-02T16:10:36.252Z,100,144.10,5.0,accepted
