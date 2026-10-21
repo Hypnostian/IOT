@@ -5,7 +5,7 @@ Comparación de MQTT, AMQP y HTTPS publicando la misma telemetría del panel sol
 
 - **Universidad:** Universidad Autónoma de Bucaramanga
 - **Asignatura:** IoT + Cloud + Sistemas Distribuidos
-- **Integrantes:** Juan Sebastian Lizcano Jaimes, Angie Katherine Suarez Ortiz
+- **Integrantes:** Juan Sebastian Lizcano Jaimes, Angie Katherine Suarez Ortiz, Miguel Angel Hernandez Quintero
 - **Fecha:** octubre de 2026
 
 ## Contenido
