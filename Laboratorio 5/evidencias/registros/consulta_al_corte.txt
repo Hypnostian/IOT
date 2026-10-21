@@ -1,0 +1,17 @@
+=== consulta del 2026-10-10T19:14:39Z (UTC)
+Bucket: lab5   medicion: ambiente   hora: Colombia (UTC-5)
+Inicio de la toma : 2026-10-10 13:52:29
+Ultimo punto      : 2026-10-10 14:14:19
+Duracion          : 0 d 0 h 21 min
+Puntos guardados  : 132 de 132 esperados a 10 s (100.00 %)
+Puntos forzados   : 36 (prueba de la alerta)
+Huecos > 30 s    : 0
+
+Ultimas 5 lecturas:
+  hora Colombia        dispositivo   temp C  hum %       lux retardo ms
+  2026-10-10 14:13:39  estacion-01    29.97   63.6   67658.5        1.1
+  2026-10-10 14:13:49  estacion-01    29.64   65.1   67518.0        0.7
+  2026-10-10 14:13:59  estacion-01    29.71   64.8   66409.4        0.6
+  2026-10-10 14:14:09  estacion-01    29.81   64.3   66025.3        0.7
+  2026-10-10 14:14:19  estacion-01    29.62   64.6   65585.6        0.7
+

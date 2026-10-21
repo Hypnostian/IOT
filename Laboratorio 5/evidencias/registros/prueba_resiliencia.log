@@ -1,0 +1,41 @@
+### Prueba 1: ingesta detenida 40 s (el broker debe guardar los mensajes)
+2026-10-10T18:49:41Z
+ Container lab5-ingesta-1 Stopping 
+ Container lab5-ingesta-1 Stopped 
+ Container lab5-mosquitto-1 Waiting 
+ Container lab5-influxdb-1 Waiting 
+ Container lab5-mosquitto-1 Healthy 
+ Container lab5-influxdb-1 Healthy 
+ Container lab5-ingesta-1 Starting 
+ Container lab5-ingesta-1 Started 
+conectado a mosquitto:1883 (Success, sesion previa=True); suscrito a lab5/+/telemetria
+1 lecturas escritas en InfluxDB; ultima ambiente,dispositivo=estacion-01,protocolo=mqtt forzado=0i,humidity=64.8,illuminance=62210.2,retardo_ms=35615.9,seq=6i,temperature=29.38 1791658199185
+
+### Prueba 2: broker MQTT detenido 40 s (el publicador debe guardar los QoS 1)
+2026-10-10T18:50:49Z
+ Container lab5-mosquitto-1 Stopping 
+ Container lab5-mosquitto-1 Stopped 
+ Container lab5-mosquitto-1 Starting 
+ Container lab5-mosquitto-1 Started 
+desconectado del broker (Unspecified error); paho reintenta solo
+conectado a mosquitto:1883 (Success); publicando en lab5/estacion-01/telemetria cada 10 s
+
+2026-10-10T18:51:56Z
+usage: consultar.py [-h] [--desde DESDE] [--hasta HASTA] [--hueco-s HUECO_S]
+consultar.py: error: argument --desde: expected one argument
+Bucket: lab5   medicion: ambiente   hora: Colombia (UTC-5)
+Inicio de la toma : 2026-10-10 13:46:32
+Ultimo punto      : 2026-10-10 13:51:59
+Duracion          : 0 d 0 h 5 min
+Puntos guardados  : 32 de 33 esperados a 10 s (96.97 %)
+Puntos forzados   : 0 (prueba de la alerta)
+Huecos > 15 s    : 1
+  2026-10-10 13:48:42 -> 2026-10-10 13:49:09  (26 s sin datos)
+
+Ultimas 5 lecturas:
+  hora Colombia        dispositivo   temp C  hum %       lux retardo ms
+  2026-10-10 13:51:19  estacion-01    29.64   65.4   70403.2    31504.0
+  2026-10-10 13:51:29  estacion-01    29.69   64.6   72501.0    21504.2
+  2026-10-10 13:51:39  estacion-01    29.41   65.4   71878.6    11504.3
+  2026-10-10 13:51:49  estacion-01    29.66   65.6   71986.3     1504.3
+  2026-10-10 13:51:59  estacion-01    29.67   66.1   72846.0        2.5

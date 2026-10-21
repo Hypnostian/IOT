@@ -1,0 +1,127 @@
+# Laboratorio 5: estacion ambiental -> MQTT (Mosquitto) -> ingesta -> InfluxDB 2 -> Grafana OSS
+# Levantar con: docker compose up -d --build   (ver README.md)
+name: lab5
+
+x-registro: &registro
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+x-app: &app
+  <<: *registro
+  build: ./app
+  image: lab5-app:1.0
+  restart: unless-stopped
+  env_file: .env
+
+services:
+  mosquitto:
+    <<: *registro
+    image: eclipse-mosquitto:2.0.22
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "/mosquitto/config/arranque.sh"]
+    environment:
+      MQTT_USUARIO: ${MQTT_USUARIO}
+      MQTT_CLAVE: ${MQTT_CLAVE}
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./mosquitto/arranque.sh:/mosquitto/config/arranque.sh:ro
+      - mosquitto_datos:/mosquitto/data
+    ports:
+      - "127.0.0.1:1883:1883"
+    healthcheck:
+      test: ["CMD-SHELL", "mosquitto_sub -h localhost -u \"$$MQTT_USUARIO\" -P \"$$MQTT_CLAVE\" -t '$$SYS/broker/uptime' -C 1 -W 5"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+      start_interval: 3s
+
+  influxdb:
+    <<: *registro
+    image: influxdb:2.9.1
+    restart: unless-stopped
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUX_USUARIO}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUX_CLAVE}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUX_ORG}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUX_BUCKET}
+      DOCKER_INFLUXDB_INIT_RETENTION: 30d
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUX_TOKEN}
+      INFLUXD_REPORTING_DISABLED: "true"
+      # La VM tiene menos de 1 GB de RAM: se limita la cache de escritura a 100 MB.
+      INFLUXD_STORAGE_CACHE_MAX_MEMORY_SIZE: "104857600"
+    volumes:
+      - influxdb_datos:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
+    ports:
+      - "127.0.0.1:8086:8086"
+    healthcheck:
+      test: ["CMD", "influx", "ping"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+      start_interval: 3s
+
+  publicador:
+    <<: *app
+    command: ["python", "-u", "publicador.py"]
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+
+  ingesta:
+    <<: *app
+    command: ["python", "-u", "ingesta.py"]
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+      influxdb:
+        condition: service_healthy
+
+  receptor-alertas:
+    <<: *app
+    command: ["python", "-u", "receptor_alertas.py"]
+    volumes:
+      - ./datos:/datos
+
+  grafana:
+    <<: *registro
+    image: grafana/grafana:13.2.3
+    restart: unless-stopped
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_CLAVE}
+      # Cualquiera que abra el tablero lo ve como Viewer, sin cuenta; editar exige entrar como admin.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /etc/grafana/dashboards/lab5_estacion.json
+      GF_DATE_FORMATS_DEFAULT_TIMEZONE: America/Bogota
+      GF_USERS_DEFAULT_LANGUAGE: es-ES
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: "false"
+      GF_NEWS_NEWS_FEED_ENABLED: "false"
+      INFLUX_ORG: ${INFLUX_ORG}
+      INFLUX_BUCKET: ${INFLUX_BUCKET}
+      INFLUX_TOKEN: ${INFLUX_TOKEN}
+    volumes:
+      - grafana_datos:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/etc/grafana/dashboards:ro
+    ports:
+      - "127.0.0.1:3000:3000"
+
+volumes:
+  mosquitto_datos:
+  influxdb_datos:
+  influxdb_config:
+  grafana_datos:

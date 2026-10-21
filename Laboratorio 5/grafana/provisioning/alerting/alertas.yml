@@ -1,0 +1,118 @@
+# Alertas del laboratorio 5: punto de contacto (webhook), politica de envio y reglas.
+apiVersion: 1
+
+contactPoints:
+  - orgId: 1
+    name: Receptor webhook (log)
+    receivers:
+      - uid: receptor-webhook
+        type: webhook
+        disableResolveMessage: false
+        settings:
+          url: http://receptor-alertas:8080/alerta
+          httpMethod: POST
+
+policies:
+  - orgId: 1
+    receiver: Receptor webhook (log)
+    group_by: ["grafana_folder", "alertname"]
+    group_wait: 10s
+    group_interval: 1m
+    repeat_interval: 1h
+
+groups:
+  - orgId: 1
+    name: Umbrales de la estacion
+    folder: Laboratorio 5
+    interval: 30s
+    rules:
+      - uid: lab5-temperatura-alta
+        title: Temperatura alta en la estacion
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 120
+              to: 0
+            datasourceUid: influx-lab5
+            model:
+              refId: A
+              query: |-
+                from(bucket: "lab5")
+                  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+                  |> filter(fn: (r) => r._measurement == "ambiente" and r._field == "temperature")
+                  |> keep(columns: ["_time", "_value", "dispositivo"])
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              refId: B
+              type: reduce
+              expression: A
+              reducer: mean
+              settings:
+                mode: dropNN
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              refId: C
+              type: threshold
+              expression: B
+              conditions:
+                - evaluator:
+                    type: gt
+                    params: [32]
+        for: 1m
+        noDataState: OK
+        execErrState: Error
+        labels:
+          severidad: alta
+        annotations:
+          summary: "Temperatura promedio de {{ .Labels.dispositivo }} en {{ printf \"%.1f\" .Values.B.Value }} C, por encima de 32 C"
+          description: "Condicion: promedio de los ultimos 2 minutos mayor que 32 C durante 1 minuto. Revisar ventilacion del gabinete del panel."
+          __dashboardUid__: lab5-estacion
+          __panelId__: "6"
+
+      - uid: lab5-sin-datos
+        title: Toma sin datos de la estacion
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 300
+              to: 0
+            datasourceUid: influx-lab5
+            model:
+              refId: A
+              query: |-
+                from(bucket: "lab5")
+                  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+                  |> filter(fn: (r) => r._measurement == "ambiente" and r._field == "seq")
+                  |> keep(columns: ["_time", "_value", "dispositivo"])
+          - refId: B
+            datasourceUid: __expr__
+            model:
+              refId: B
+              type: reduce
+              expression: A
+              reducer: count
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              refId: C
+              type: threshold
+              expression: B
+              conditions:
+                - evaluator:
+                    type: lt
+                    params: [1]
+        for: 1m
+        # Si en 5 minutos no llega ningun punto la consulta queda vacia: eso es justo un hueco en la toma.
+        noDataState: Alerting
+        execErrState: Error
+        labels:
+          severidad: media
+        annotations:
+          summary: "No han llegado lecturas de la estacion en los ultimos 5 minutos"
+          description: "Hueco en la toma de 4 dias. Revisar publicador, broker MQTT e ingesta (docker compose ps)."
+          __dashboardUid__: lab5-estacion
+          __panelId__: "9"

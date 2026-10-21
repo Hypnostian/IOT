@@ -1,0 +1,3 @@
+# Sin plugins extra: el archivo existe para que Grafana no registre error por la carpeta vacia.
+apiVersion: 1
+apps: []

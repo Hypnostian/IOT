@@ -1,0 +1,15 @@
+Datos de instalacion y pruebas borrados hasta 2026-10-10T18:52:27Z; desde aqui empieza la toma oficial de 4 dias.
+Bucket: lab5   medicion: ambiente   hora: Colombia (UTC-5)
+Inicio de la toma : 2026-10-10 13:52:29
+Ultimo punto      : 2026-10-10 13:52:59
+Duracion          : 0 d 0 h 0 min
+Puntos guardados  : 4 de 4 esperados a 10 s (100.00 %)
+Puntos forzados   : 0 (prueba de la alerta)
+Huecos > 30 s    : 0
+
+Ultimas 5 lecturas:
+  hora Colombia        dispositivo   temp C  hum %       lux retardo ms
+  2026-10-10 13:52:29  estacion-01    29.61   65.5   70861.0        0.6
+  2026-10-10 13:52:39  estacion-01    29.46   65.0   73701.8        0.6
+  2026-10-10 13:52:49  estacion-01    29.65   65.0   75391.4        0.7
+  2026-10-10 13:52:59  estacion-01    29.76   65.6   75798.8        0.6

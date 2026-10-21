@@ -1,0 +1,8 @@
+# Los scripts y configuraciones se ejecutan en Linux: siempre con fin de linea LF
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.conf text eol=lf
+*.json text eol=lf
+Dockerfile text eol=lf
+.env.example text eol=lf
