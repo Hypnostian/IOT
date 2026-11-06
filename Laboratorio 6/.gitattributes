@@ -1,0 +1,6 @@
+# Los scripts, manifiestos y Bicep se ejecutan en Linux: siempre con fin de linea LF
+*.sh text eol=lf
+*.php text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.bicep text eol=lf

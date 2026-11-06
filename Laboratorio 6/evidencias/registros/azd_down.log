@@ -1,0 +1,17 @@
+2026-11-03T21:18:44Z inicio azd down
+
+Deleting all resources and deployed code on Azure (azd down)
+Local application code is not deleted when running 'azd down'.
+
+Discovering resources to delete...
+Deleting your resources can take some time.
+
+Purging Log Analytics Workspace: log-s2kjzmqpeidya
+  (✓) Done: Purging Log Analytics Workspace: log-s2kjzmqpeidya
+Deleting resource group rg-lab6
+  (✓) Done: Deleted resource group rg-lab6
+
+
+SUCCESS: Your application was removed from Azure in 16 minutes 42 seconds.
+EXIT=0
+2026-11-03T21:35:32Z fin

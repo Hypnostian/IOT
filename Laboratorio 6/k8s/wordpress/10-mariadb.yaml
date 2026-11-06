@@ -1,0 +1,91 @@
+# Base de datos propia de WordPress: PVC + Deployment + Service ClusterIP (no se expone a Internet).
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-datos
+  namespace: wordpress
+  labels:
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/part-of: portal-wordpress
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: managed-csi
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  namespace: wordpress
+  labels:
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/component: base-de-datos
+    app.kubernetes.io/part-of: portal-wordpress
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # el disco es ReadWriteOnce: el pod viejo lo suelta antes de que arranque el nuevo
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mariadb
+      app.kubernetes.io/part-of: portal-wordpress
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mariadb
+        app.kubernetes.io/component: base-de-datos
+        app.kubernetes.io/part-of: portal-wordpress
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb:10.11
+          ports:
+            - name: mysql
+              containerPort: 3306
+          envFrom:
+            - secretRef:
+                name: wordpress-db # MARIADB_ROOT_PASSWORD, MARIADB_DATABASE, MARIADB_USER, MARIADB_PASSWORD
+          volumeMounts:
+            - name: datos
+              mountPath: /var/lib/mysql
+              subPath: mysql # evita la carpeta lost+found del disco
+          readinessProbe:
+            exec:
+              command: ["healthcheck.sh", "--connect", "--innodb_initialized"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command: ["healthcheck.sh", "--connect"]
+            initialDelaySeconds: 60
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 768Mi
+      volumes:
+        - name: datos
+          persistentVolumeClaim:
+            claimName: mariadb-datos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+  namespace: wordpress
+  labels:
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/part-of: portal-wordpress
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/part-of: portal-wordpress
+  ports:
+    - name: mysql
+      port: 3306
+      targetPort: mysql

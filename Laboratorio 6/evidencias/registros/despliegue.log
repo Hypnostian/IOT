@@ -1,0 +1,61 @@
+2026-11-03T20:37:50Z inicio despliegue
+WARNING: Merged "aks-s2kjzmqpeidya" as current context in /home/hypnostian/.kube/config
+NAME                                 STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-systempool-35642781-vmss000000   Ready    <none>   7m50s   v1.36.5   10.224.0.4    <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+aks-systempool-35642781-vmss000001   Ready    <none>   7m50s   v1.36.5   10.224.0.5    <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+namespace/wordpress unchanged
+namespace/prestashop unchanged
+Secret wordpress/wordpress-db ya existe; se conserva.
+Secret wordpress/wordpress-admin ya existe; se conserva.
+Secret prestashop/prestashop-db ya existe; se conserva.
+Secret prestashop/prestashop-admin ya existe; se conserva.
+== Bases de datos
+persistentvolumeclaim/mariadb-datos unchanged
+deployment.apps/mariadb unchanged
+service/mariadb unchanged
+persistentvolumeclaim/mariadb-datos unchanged
+deployment.apps/mariadb unchanged
+service/mariadb unchanged
+deployment "mariadb" successfully rolled out
+deployment "mariadb" successfully rolled out
+== WordPress
+persistentvolumeclaim/wordpress-contenido unchanged
+deployment.apps/wordpress unchanged
+service/wordpress unchanged
+service/wordpress configured
+== PrestaShop
+service/prestashop created
+configmap/prestashop-dominio created
+persistentvolumeclaim/prestashop-contenido created
+deployment.apps/prestashop created
+deployment "wordpress" successfully rolled out
+Esperando la instalacion automatica de PrestaShop (5 a 10 minutos)...
+Waiting for deployment "prestashop" rollout to finish: 0 of 1 updated replicas are available...
+deployment "prestashop" successfully rolled out
+
+NAME                             READY   STATUS    RESTARTS   AGE     IP            NODE                                 NOMINATED NODE   READINESS GATES
+pod/mariadb-6fdf7b47b5-tjvch     1/1     Running   0          8m23s   10.244.1.33   aks-systempool-35642781-vmss000000   <none>           <none>
+pod/wordpress-5b98f7c954-5fqcg   2/2     Running   0          7m52s   10.244.1.6    aks-systempool-35642781-vmss000000   <none>           <none>
+
+NAME                                        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE     VOLUMEMODE
+persistentvolumeclaim/mariadb-datos         Bound    pvc-ece67254-86fd-488a-aaa3-9a130ff4b4d0   5Gi        RWO            managed-csi    <unset>                 8m23s   Filesystem
+persistentvolumeclaim/wordpress-contenido   Bound    pvc-7ce1b0ff-75ac-488d-9bb7-746e90d1f141   5Gi        RWO            managed-csi    <unset>                 7m52s   Filesystem
+
+NAME                TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)        AGE     SELECTOR
+service/mariadb     ClusterIP      10.0.45.46    <none>         3306/TCP       8m23s   app.kubernetes.io/name=mariadb,app.kubernetes.io/part-of=portal-wordpress
+service/wordpress   LoadBalancer   10.0.86.133   172.195.82.9   80:30677/TCP   7m52s   app.kubernetes.io/name=wordpress,app.kubernetes.io/part-of=portal-wordpress
+NAME                              READY   STATUS    RESTARTS      AGE     IP             NODE                                 NOMINATED NODE   READINESS GATES
+pod/mariadb-544cfbd945-5v8fl      1/1     Running   0             8m23s   10.244.0.246   aks-systempool-35642781-vmss000001   <none>           <none>
+pod/prestashop-577bf44844-2dn9j   1/1     Running   1 (12s ago)   2m40s   10.244.1.40    aks-systempool-35642781-vmss000000   <none>           <none>
+
+NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE     VOLUMEMODE
+persistentvolumeclaim/mariadb-datos          Bound    pvc-d094b2ca-dfef-4e49-9131-29cf015bdf4e   5Gi        RWO            managed-csi    <unset>                 8m23s   Filesystem
+persistentvolumeclaim/prestashop-contenido   Bound    pvc-e4deaf8e-88c1-4e4b-ace7-cfd7f81d79c0   5Gi        RWO            managed-csi    <unset>                 2m40s   Filesystem
+
+NAME                 TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)          AGE     SELECTOR
+service/mariadb      ClusterIP      10.0.50.241   <none>         3306/TCP         8m23s   app.kubernetes.io/name=mariadb,app.kubernetes.io/part-of=portal-prestashop
+service/prestashop   LoadBalancer   10.0.95.211   172.195.82.9   8080:32120/TCP   2m54s   app.kubernetes.io/name=prestashop,app.kubernetes.io/part-of=portal-prestashop
+EXIT=0
+2026-11-03T20:40:59Z fin
+2026-11-03T20:42:08Z reinstalacion de PrestaShop sin PS_FOLDER_ADMIN
+2026-11-03T20:44:11Z base y tienda de PrestaShop recreadas desde cero

@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+# Proyecto creado con: azd init -t https://github.com/sabbour/aks-app-template
+# azd provisiona AKS, Prometheus administrado y Azure Managed Grafana; los portales se despliegan
+# con kubectl desde k8s/ (scripts/desplegar.sh), por eso no hay seccion services.
+name: lab6-portales
+metadata:
+    template: aks-app-template@0.0.1-beta
+hooks:
+    preprovision:
+        interactive: false
+        shell: sh
+        run: chmod +x infra/azd-hooks/preprovision.sh && infra/azd-hooks/preprovision.sh
+infra:
+    provider: bicep
+    path: infra
+    module: main

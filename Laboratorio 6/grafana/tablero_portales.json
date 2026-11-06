@@ -1,0 +1,471 @@
+{
+  "dashboard": {
+    "uid": "lab6-portales",
+    "title": "Laboratorio 6 - WordPress y PrestaShop en AKS",
+    "tags": [
+      "laboratorio6",
+      "aks",
+      "wordpress",
+      "prestashop"
+    ],
+    "timezone": "America/Bogota",
+    "editable": true,
+    "refresh": "1m",
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "schemaVersion": 39,
+    "templating": {
+      "list": [
+        {
+          "name": "datasource",
+          "label": "Prometheus",
+          "type": "datasource",
+          "query": "prometheus",
+          "current": {},
+          "hide": 0,
+          "refresh": 1,
+          "regex": "",
+          "includeAll": false,
+          "multi": false
+        }
+      ]
+    },
+    "panels": [
+      {
+        "id": 1,
+        "type": "text",
+        "title": "",
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 24,
+          "h": 3
+        },
+        "options": {
+          "mode": "markdown",
+          "content": "**Laboratorio 6: dos portales en el mismo AKS.** Azul = namespace **wordpress** (WordPress y su MariaDB); naranja = namespace **prestashop** (PrestaShop y su MariaDB). Cada portal tiene su propia base de datos y su propio disco. Un reinicio se ve como una serie que termina y otra que empieza con un pod de nombre nuevo. Datos: Prometheus administrado (kube-state-metrics y cAdvisor) del clúster."
+        }
+      },
+      {
+        "id": 2,
+        "type": "stat",
+        "title": "Pods en ejecución por portal",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "Pods en fase Running en cada namespace (portal + base de datos).",
+        "gridPos": {
+          "x": 0,
+          "y": 3,
+          "w": 8,
+          "h": 6
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "expr": "sum by (namespace) (kube_pod_status_phase{namespace=~\"wordpress|prestashop\", phase=\"Running\"})",
+            "legendFormat": "{{namespace}}",
+            "instant": true,
+            "range": false,
+            "format": "time_series"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "green"
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "wordpress.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#3274D9"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "prestashop.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#FF9830"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "colorMode": "background",
+          "graphMode": "none",
+          "textMode": "value_and_name",
+          "justifyMode": "center",
+          "orientation": "horizontal"
+        }
+      },
+      {
+        "id": 3,
+        "type": "table",
+        "title": "Pods de los dos portales",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "description": "Cada pod con su namespace, el Deployment al que pertenece y su fase.",
+        "gridPos": {
+          "x": 8,
+          "y": 3,
+          "w": 16,
+          "h": 6
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "expr": "max by (namespace, pod, phase) (kube_pod_status_phase{namespace=~\"wordpress|prestashop\"} == 1)",
+            "legendFormat": "",
+            "instant": true,
+            "range": false,
+            "format": "table"
+          }
+        ],
+        "transformations": [
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "Time": true,
+                "Value": true
+              },
+              "renameByName": {
+                "namespace": "Namespace (portal)",
+                "pod": "Pod",
+                "phase": "Fase"
+              }
+            }
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "left"
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "showHeader": true,
+          "sortBy": [
+            {
+              "displayName": "Namespace (portal)"
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "type": "timeseries",
+        "title": "CPU por pod (núcleos)",
+        "description": "Uso de CPU de cada pod. La instalación de PrestaShop y los reinicios se ven como picos.",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "x": 0,
+          "y": 9,
+          "w": 12,
+          "h": 9
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "expr": "sum by (namespace, pod) (rate(container_cpu_usage_seconds_total{namespace=~\"wordpress|prestashop\", container!=\"\", container!=\"POD\"}[5m]))",
+            "legendFormat": "{{namespace}} / {{pod}}",
+            "instant": false,
+            "range": true,
+            "format": "time_series"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 8,
+              "showPoints": "never",
+              "spanNulls": false
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "wordpress.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#3274D9"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "prestashop.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#FF9830"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom",
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ]
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "type": "timeseries",
+        "title": "Memoria por pod",
+        "description": "Memoria en uso (working set) de cada pod.",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "x": 12,
+          "y": 9,
+          "w": 12,
+          "h": 9
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "expr": "sum by (namespace, pod) (container_memory_working_set_bytes{namespace=~\"wordpress|prestashop\", container!=\"\", container!=\"POD\"})",
+            "legendFormat": "{{namespace}} / {{pod}}",
+            "instant": false,
+            "range": true,
+            "format": "time_series"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "bytes",
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 8,
+              "showPoints": "never",
+              "spanNulls": false
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "wordpress.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#3274D9"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "prestashop.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#FF9830"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "legend": {
+            "displayMode": "table",
+            "placement": "bottom",
+            "calcs": [
+              "lastNotNull",
+              "max"
+            ]
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "desc"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "type": "state-timeline",
+        "title": "Pods en ejecución en el tiempo (un reinicio = pod nuevo)",
+        "description": "Una fila por pod mientras está en Running. Tras reiniciar un Deployment, la fila del pod viejo termina y empieza la del pod nuevo; la base de datos del portal sigue en la misma fila.",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "gridPos": {
+          "x": 0,
+          "y": 18,
+          "w": 24,
+          "h": 9
+        },
+        "targets": [
+          {
+            "refId": "A",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${datasource}"
+            },
+            "expr": "max by (namespace, pod) (kube_pod_status_phase{namespace=~\"wordpress|prestashop\", phase=\"Running\"} == 1)",
+            "legendFormat": "{{namespace}} / {{pod}}",
+            "instant": false,
+            "range": true,
+            "format": "time_series"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "green"
+            },
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "1": {
+                    "text": "Running"
+                  }
+                }
+              }
+            ],
+            "custom": {
+              "fillOpacity": 85,
+              "lineWidth": 0
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "wordpress.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#3274D9"
+                  }
+                }
+              ]
+            },
+            {
+              "matcher": {
+                "id": "byRegexp",
+                "options": "prestashop.*"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "fixed",
+                    "fixedColor": "#FF9830"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "showValue": "never",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "alignValue": "left",
+          "legend": {
+            "showLegend": false
+          },
+          "tooltip": {
+            "mode": "single"
+          }
+        }
+      }
+    ]
+  },
+  "overwrite": true
+}

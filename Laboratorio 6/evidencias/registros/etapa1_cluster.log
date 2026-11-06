@@ -1,0 +1,19 @@
+$ azd env get-values (sin IDs)
+AZURE_AKS_CLUSTER_NAME="aks-s2kjzmqpeidya"
+AZURE_KUBERNETES_VERSION="1.36.5"
+AZURE_LOCATION="mexicocentral"
+AZURE_MANAGED_GRAFANA_ENDPOINT="https://gpd-s2kjzmqpeidya-fecvahdxdpdqgzc9.wus.grafana.azure.com"
+AZURE_MANAGED_GRAFANA_NAME="gpd-s2kjzmqpeidya"
+AZURE_MANAGED_PROMETHEUS_NAME="monitor-s2kjzmqpeidya"
+AZURE_RESOURCE_GROUP="rg-lab6"
+
+$ kubectl get nodes -o wide
+WARNING: Merged "aks-s2kjzmqpeidya" as current context in /home/hypnostian/.kube/config
+NAME                                 STATUS   ROLES    AGE    VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION             CONTAINER-RUNTIME
+aks-systempool-35642781-vmss000000   Ready    <none>   2m5s   v1.36.5   10.224.0.4    <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+aks-systempool-35642781-vmss000001   Ready    <none>   2m5s   v1.36.5   10.224.0.5    <none>        Ubuntu 24.04.5 LTS   6.8.0-1071-azure (amd64)   containerd://2.3.7-3
+
+$ kubectl version
+Client Version: v1.37.2
+Kustomize Version: v5.8.1
+Server Version: v1.36.5

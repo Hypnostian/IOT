@@ -1,0 +1,7 @@
+2026-11-03T20:46:14Z instalar_portales
+== WordPress en http://172.195.82.9
+Success: WordPress installed successfully.
+Pagina de prueba: http://172.195.82.9/?page_id=5
+== PrestaShop en http://172.195.82.9:8080
+Producto de prueba creado (id_product=20, referencia LAB6-PRUEBA)
+Producto de prueba: http://172.195.82.9:8080/index.php?id_product=20&controller=product

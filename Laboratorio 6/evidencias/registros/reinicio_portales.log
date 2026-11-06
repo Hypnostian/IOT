@@ -1,0 +1,45 @@
+############ ANTES DEL REINICIO
+== 2026-11-03T20:52:55Z
+NAMESPACE   POD                          ESTADO    INICIO
+wordpress   mariadb-6fdf7b47b5-tjvch     Running   2026-11-03T20:32:38Z
+wordpress   wordpress-5b98f7c954-5fqcg   Running   2026-11-03T20:33:14Z
+prestashop   mariadb-544cfbd945-j8rgs     Running   2026-11-03T20:43:49Z
+prestashop   prestashop-77888d9c6-pqbv4   Running   2026-11-03T20:44:22Z
+
+WordPress (BD wordpress/mariadb):
+ID	post_title	post_status	post_date
+5	Pagina de prueba Laboratorio 6	publish	2026-11-03 20:46:38
+Sitio http://172.195.82.9: 3 coincidencias del titulo
+
+PrestaShop (BD prestashop/mariadb):
+id_product	reference	name	price	date_add
+20	LAB6-PRUEBA	Producto de prueba Laboratorio 6	49.900000	2026-11-03 21:46:39
+Sitio http://172.195.82.9:8080: 16 coincidencias del nombre
+
+############ REINICIO
+deployment.apps/wordpress restarted
+deployment.apps/prestashop restarted
+Waiting for deployment "wordpress" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "wordpress" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "wordpress" rollout to finish: 0 out of 1 new replicas have been updated...
+Waiting for deployment "wordpress" rollout to finish: 0 of 1 updated replicas are available...
+deployment "wordpress" successfully rolled out
+deployment "prestashop" successfully rolled out
+
+############ DESPUES DEL REINICIO
+== 2026-11-03T20:53:31Z
+NAMESPACE   POD                          ESTADO    INICIO
+wordpress   mariadb-6fdf7b47b5-tjvch     Running   2026-11-03T20:32:38Z
+wordpress   wordpress-7b6767b578-r64c8   Running   2026-11-03T20:53:16Z
+prestashop   mariadb-544cfbd945-j8rgs      Running   2026-11-03T20:43:49Z
+prestashop   prestashop-78d85fb676-8vrlx   Running   2026-11-03T20:53:15Z
+
+WordPress (BD wordpress/mariadb):
+ID	post_title	post_status	post_date
+5	Pagina de prueba Laboratorio 6	publish	2026-11-03 20:46:38
+Sitio http://172.195.82.9: 3 coincidencias del titulo
+
+PrestaShop (BD prestashop/mariadb):
+id_product	reference	name	price	date_add
+20	LAB6-PRUEBA	Producto de prueba Laboratorio 6	49.900000	2026-11-03 21:46:39
+Sitio http://172.195.82.9:8080: 16 coincidencias del nombre

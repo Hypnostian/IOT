@@ -1,0 +1,22 @@
+# Service LoadBalancer de PrestaShop, en el puerto 8080. Se aplica antes que el Deployment porque la tienda
+# se instala con su IP publica y su puerto como dominio (ConfigMap prestashop-dominio).
+# Azure for Students permite solo 3 IP publicas por region; scripts/desplegar.sh agrega la anotacion
+# service.beta.kubernetes.io/azure-pip-name para que los dos portales compartan la IP del balanceador
+# del clúster: WordPress en el puerto 80 y PrestaShop en el 8080.
+apiVersion: v1
+kind: Service
+metadata:
+  name: prestashop
+  namespace: prestashop
+  labels:
+    app.kubernetes.io/name: prestashop
+    app.kubernetes.io/part-of: portal-prestashop
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: prestashop
+    app.kubernetes.io/part-of: portal-prestashop
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

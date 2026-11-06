@@ -1,0 +1,19 @@
+
+Previewing Azure resource changes (azd provision --preview)
+This is a preview. No changes will be applied to your Azure resources.
+
+Initialize bicep provider
+Reading subscription and location from environment...
+Subscription: Azure for Students (<id-suscripcion>)
+Location: Mexico Central
+
+Creating a deployment plan
+Generating infrastructure preview
+  Resources:
+
+  Create : Resource group          : rg-lab6
+  Create : Container Registry      : crs2kjzmqpeidya
+  Create : AKS Managed Cluster     : aks-s2kjzmqpeidya
+  Create : Log Analytics workspace : log-s2kjzmqpeidya
+
+SUCCESS: Generated provisioning preview in 45 seconds.

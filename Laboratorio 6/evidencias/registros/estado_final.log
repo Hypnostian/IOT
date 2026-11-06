@@ -1,0 +1,18 @@
+== estado final antes de azd down 2026-11-03T21:18:06Z
+NAMESPACE    NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+prestashop   deployment.apps/mariadb      1/1     1            1           34m
+prestashop   deployment.apps/prestashop   1/1     1            1           33m
+wordpress    deployment.apps/mariadb      1/1     1            1           45m
+wordpress    deployment.apps/wordpress    1/1     1            1           45m
+
+NAMESPACE    NAME                 TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)          AGE
+prestashop   service/mariadb      ClusterIP      10.0.50.241   <none>         3306/TCP         45m
+prestashop   service/prestashop   LoadBalancer   10.0.95.211   172.195.82.9   8080:32120/TCP   40m
+wordpress    service/mariadb      ClusterIP      10.0.45.46    <none>         3306/TCP         45m
+wordpress    service/wordpress    LoadBalancer   10.0.86.133   172.195.82.9   80:30677/TCP     45m
+
+NAMESPACE    NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+prestashop   persistentvolumeclaim/mariadb-datos          Bound    pvc-41b2b320-7d2e-49f0-9a2f-68e3636673ea   5Gi        RWO            managed-csi    <unset>                 34m
+prestashop   persistentvolumeclaim/prestashop-contenido   Bound    pvc-b46623b5-922c-4648-bb3d-6f219ca3d420   5Gi        RWO            managed-csi    <unset>                 33m
+wordpress    persistentvolumeclaim/mariadb-datos          Bound    pvc-ece67254-86fd-488a-aaa3-9a130ff4b4d0   5Gi        RWO            managed-csi    <unset>                 45m
+wordpress    persistentvolumeclaim/wordpress-contenido    Bound    pvc-7ce1b0ff-75ac-488d-9bb7-746e90d1f141   5Gi        RWO            managed-csi    <unset>                 45m

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "grafanaLocation": {
+      "value": "${AZURE_GRAFANA_LOCATION=westus}"
+    },
+    "principalId": {
+      "value": "${AZURE_PRINCIPAL_ID}"
+    },
+    "kubernetesVersion": {
+      "value": "${AZURE_KUBERNETES_VERSION=1.36}"
+    },
+    "nodeVmSize": {
+      "value": "${AZURE_NODE_VM_SIZE=Standard_B2as_v2}"
+    },
+    "nodeCount": {
+      "value": 2
+    }
+  }
+}

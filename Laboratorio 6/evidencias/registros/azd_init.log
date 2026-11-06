@@ -1,0 +1,12 @@
+2026-11-03T20:14:23Z azd init
+
+Initializing an app to run on Azure (azd init)
+
+Downloading template code to: /home/hypnostian/laboratorio6/plantilla
+  (✓) Done: Initialized git repository
+  (✓) Done: Downloading template code to: /home/hypnostian/laboratorio6/plantilla
+
+
+SUCCESS: New project initialized!
+You can view the template code in your directory: /home/hypnostian/laboratorio6/plantilla
+Learn more about running 3rd party code on our DevHub: https://aka.ms/azd-third-party-code-notice
